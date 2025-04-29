@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 166823374}
   - component: {fileID: 166823377}
   - component: {fileID: 166823376}
+  - component: {fileID: 166823378}
   m_Layer: 0
   m_Name: Player1Goal
   m_TagString: Untagged
@@ -267,6 +268,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &166823378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166823373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &179236692
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179236694}
   - component: {fileID: 179236693}
+  - component: {fileID: 179236695}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -296,10 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a03f195768ffa840ad395687389a936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 0}
-  player1Paddle: {fileID: 0}
+  ball: {fileID: 1643372218035786056, guid: 76c8e937708352a45b455dba801c11c0, type: 3}
   player1Goal: {fileID: 166823376}
-  player2Paddle: {fileID: 0}
   player2Goal: {fileID: 372827100}
   player1Text: {fileID: 2071091928}
   player2Text: {fileID: 633489882}
@@ -318,6 +340,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &179236695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179236692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &245121466
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +477,7 @@ GameObject:
   - component: {fileID: 372827098}
   - component: {fileID: 372827101}
   - component: {fileID: 372827100}
+  - component: {fileID: 372827102}
   m_Layer: 0
   m_Name: Player2Goal
   m_TagString: Untagged
@@ -569,6 +614,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &372827102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372827097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

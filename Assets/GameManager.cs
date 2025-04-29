@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Ball ball;
 
     [Header("Player 1")]
-    public Paddle player1Paddle;
+    // public Paddle player1Paddle;
     public Goal player1Goal;
 
     [Header("Player 2")]
-    public Paddle player2Paddle;
+    // public Paddle player2Paddle;
     public Goal player2Goal;
 
     [Header("UI")]
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         SpawnPaddle();
-        if (photonView.AmOwner)
+        if (photonView != null && photonView.AmOwner)
             SpawnBall();
     }
 
