@@ -4,11 +4,11 @@ using UnityEngine;
 public class Ball : MonoBehaviourPun, IPunObservable
 {
     public float speed;
-    public Rigidbody2D rigidbody;
+    public Rigidbody2D rb;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -32,12 +32,12 @@ public class Ball : MonoBehaviourPun, IPunObservable
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
 
-        rigidbody.linearVelocity = new Vector2(x * speed, y * speed);
+        rb.linearVelocity = new Vector2(x * speed, y * speed);
     }
 
     public void Reset()
     {
-        rigidbody.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         transform.position = Vector2.zero;
         Invoke("Launch", 1);
     }
@@ -46,13 +46,13 @@ public class Ball : MonoBehaviourPun, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(rigidbody.position);
-            stream.SendNext(rigidbody.linearVelocity);
+            stream.SendNext(rb.position);
+            stream.SendNext(rb.linearVelocity);
         }
         else
         {
-            rigidbody.position = (Vector2)stream.ReceiveNext();
-            rigidbody.linearVelocity = (Vector2)stream.ReceiveNext();
+            rb.position = (Vector2)stream.ReceiveNext();
+            rb.linearVelocity = (Vector2)stream.ReceiveNext();
         }
     }
 }
