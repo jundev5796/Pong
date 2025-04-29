@@ -24,12 +24,12 @@ public class Paddle : MonoBehaviour
         _movement = 0f;
         if(Input.GetKey(Up)) { _movement += 1f; }
         if(Input.GetKey(Down)) { _movement -= 1f; }
-        _rigidbody.velocity = new Vector2(0, _movement * speed);    
+        _rigidbody.linearVelocity = new Vector2(0, _movement * speed);    
     }
 
     public void Reset()
     {
-        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.linearVelocity = Vector3.zero;
         transform.position = _startPosition;
     }
 }

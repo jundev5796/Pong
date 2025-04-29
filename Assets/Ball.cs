@@ -17,12 +17,12 @@ public class Ball : MonoBehaviour
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
 
-        _rigidbody.velocity = new Vector2(x * _speed, y * _speed);
+        _rigidbody.linearVelocity = new Vector2(x * _speed, y * _speed);
     }
 
     public void Reset()
     {
-        _rigidbody.velocity = Vector2.zero;
+        _rigidbody.linearVelocity = Vector2.zero;
         transform.position = Vector2.zero;
         Launch();
     }
