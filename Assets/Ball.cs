@@ -1,29 +1,58 @@
+using Photon.Pun;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviourPun, IPunObservable
 {
-    [SerializeField] private float _speed;
-    private Rigidbody2D _rigidbody;
+    public float speed;
+    public Rigidbody2D rigidbody;
 
-    
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+
+        if (!photonView.AmOwner)
+        {
+            return;
+        }
+
         Launch();
     }
 
     private void Launch()
     {
+        if (!photonView.AmOwner)
+        {
+            return;
+        }
+
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
 
-        _rigidbody.linearVelocity = new Vector2(x * _speed, y * _speed);
+        rigidbody.linearVelocity = new Vector2(x * speed, y * speed);
     }
 
     public void Reset()
     {
-        _rigidbody.linearVelocity = Vector2.zero;
+        rigidbody.linearVelocity = Vector2.zero;
         transform.position = Vector2.zero;
-        Launch();
+        Invoke("Launch", 1);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(rigidbody.position);
+            stream.SendNext(rigidbody.linearVelocity);
+        }
+        else
+        {
+            rigidbody.position = (Vector2)stream.ReceiveNext();
+            rigidbody.linearVelocity = (Vector2)stream.ReceiveNext();
+        }
     }
 }

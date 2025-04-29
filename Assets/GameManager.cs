@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     [Header("Ball")]
     public Ball ball;
@@ -23,24 +23,77 @@ public class GameManager : MonoBehaviour
     private int player1Score;
     private int player2Score;
 
+    private void Start()
+    {
+        SpawnPaddle();
+        if (photonView.AmOwner)
+            SpawnBall();
+    }
+
+    private void SpawnPaddle()
+    {
+        int idx = PhotonNetwork.LocalPlayer.ActorNumber;
+        GameObject prefab = Resources.Load<GameObject>("Paddle");
+
+        if (idx == 1)
+        {
+            PhotonNetwork.Instantiate(prefab.name, new Vector3(-12, 0, 0), Quaternion.identity);
+        }
+        else
+        {
+            PhotonNetwork.Instantiate(prefab.name, new Vector3(12, 0, 0), Quaternion.identity);
+        }
+    }
+
+    private void SpawnBall()
+    {
+        GameObject prefab = Resources.Load<GameObject>("Ball");
+        GameObject go = PhotonNetwork.Instantiate(prefab.name, Vector3.zero, Quaternion.identity);
+        ball = go.GetComponent<Ball>();
+
+    }
+
+
     public void Player1Scored()
     {
-        player1Score++;
-        player1Text.text = player1Score.ToString();
-        ResetPosition();
+        if (photonView.AmOwner)
+        {
+            player1Score++;
+            ResetPosition();
+            photonView.RPC("UpdateScore", RpcTarget.All, player1Score, player2Score);
+        }
     }
 
     public void Player2Scored()
     {
-        player2Score++;
-        player2Text.text = player2Score.ToString();
-        ResetPosition();
+        if (photonView.AmOwner)
+        {
+            player2Score++;
+            ResetPosition();
+            photonView.RPC("UpdateScore", RpcTarget.All, player1Score, player2Score);
+        }
+    }
+
+
+    [PunRPC]
+    public void UpdateScore(int score1, int score2)
+    {
+        player1Text.text = score1.ToString();
+        player2Text.text = score2.ToString();
+
+        if (score1 > 5 || score2 > 5)
+            PhotonNetwork.LeaveRoom();
     }
 
     private void ResetPosition()
     {
         ball.Reset();
-        player1Paddle.Reset();
-        player2Paddle.Reset();        
     }
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene("LobbyScene");
+    }
+
+
 }

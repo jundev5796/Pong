@@ -53,6 +53,12 @@ namespace Photon.Pun.Demo.Asteroids
             PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
         }
 
+        private void Start()
+        {
+            if (PhotonNetwork.NetworkClientState == ClientState.Joined)
+                this.SetActivePanel(SelectionPanel.name);
+        }
+
         #endregion
 
         #region PUN CALLBACKS
